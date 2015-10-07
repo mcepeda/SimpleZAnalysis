@@ -54,15 +54,15 @@ process.output = cms.OutputModule(
                                            )
 process.options = cms.untracked.PSet()
 
-from L1Trigger.UWTriggerTools.patch_metNoHFinMINIAOD_cfi import patch
-#L1Trigger.UWTriggerTools.patch_metNoHFinMINIAOD_cfi.patch(process)
+
+from L1Trigger.SimpleZAnalysis.patch_metNoHFinMINIAOD_cfi import patch
 patch(process)
 
 process.p1 = cms.Path(
     process.rerunMET
     )
 
-process.effitreemini = cms.EDAnalyzer("MiniEffiTree",
+process.effitreeWZ = cms.EDAnalyzer("WZEffiTree",
      isMC=cms.untracked.bool(True),
      src = cms.VInputTag(cms.InputTag("l1extraParticles", "Isolated"),cms.InputTag("l1extraParticles", "NonIsolated")),
      recoSrcJet=cms.VInputTag(cms.InputTag("slimmedJets")),
@@ -81,7 +81,7 @@ electronsMiniAOD = cms.InputTag("slimmedElectrons"),
     objects = cms.InputTag("selectedPatTrigger"),
 )
 
-process.effitreeminiIso = cms.EDAnalyzer("MiniEffiTree",
+process.effitreeWZIso = cms.EDAnalyzer("WZEffiTree",
      isMC=cms.untracked.bool(True),
      src = cms.VInputTag(cms.InputTag("l1extraParticles", "Isolated")),
      recoSrcJet=cms.VInputTag(cms.InputTag("slimmedJets")),
@@ -100,12 +100,6 @@ electronsMiniAOD = cms.InputTag("slimmedElectrons"),
     objects = cms.InputTag("selectedPatTrigger"),
 )
 
-process.FilterZEE=cms.EDFilter("FilterZLLByChannel",
-            nMuons=cms.untracked.int32(0),
-            nElectrons=cms.untracked.int32(2),
-            nTaus=cms.untracked.int32(0)
-)
-
 from PhysicsTools.SelectorUtils.tools.vid_id_tools import *
 dataFormat = DataFormat.MiniAOD
 
@@ -121,7 +115,7 @@ for idmod in my_id_modules:
 
 process.dummy = cms.EDAnalyzer("Dummy")
 
-process.p5=cms.Path(process.FilterZEE*process.egmGsfElectronIDSequence*process.effitreemini*process.effitreeminiIso)
+process.p5=cms.Path(process.egmGsfElectronIDSequence*process.effitreeWZ*process.effitreeWZIso)
 
 process.output_step = cms.EndPath(process.output)
 

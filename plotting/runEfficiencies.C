@@ -7,28 +7,24 @@
 
 void runEfficiencies(){
 
-        double LUMI=23.7;
-
         TFile *fileDataStage1= new TFile("roots/test.root");
+        TFile *fileDYMC= new TFile("roots/dymini.root");
 
         TTree* tupleDataStage1DEF=  (TTree*)fileDataStage1->Get("effitreeWZDEFAULT/Ntuple");
         effis treeStage1DEF;
         treeStage1DEF.Init(tupleDataStage1DEF);
         treeStage1DEF.Loop("outputs/DataStage1DEF.root", 1,false);
 
-
-/*  
         //For MC     
 
         double LUMI=23.7;
         double xsec=2008.4*3;
-        double normalization=1.56649e+09;
+        double normalization=1.56626e+08;    // caution with the MC@NLO weights... this is not perfectly well done here!
 
-        TTree* tupleMCStage125nsDEF=  (TTree*)fileMCStage125ns->Get("effitreeminiDEFAULT/Ntuple");
+        TTree* tupleMCStage125nsDEF=  (TTree*)fileDYMC->Get("effitreeWZ/Ntuple");
         effis treeMCStage125nsDEF;
         treeMCStage125nsDEF.Init(tupleMCStage125nsDEF);
         treeMCStage125nsDEF.Loop("outputs/MCStage125nsDEF.root", xsec*LUMI/normalization,false);
-*/
 
 }
 
@@ -538,7 +534,7 @@ void effis::Loop(TString outputFile="outputs/Data.root", double scale=1, bool fo
         effiHLT_PtSecond->SetName("effiHLT_PtSecond");
         effiHLT_PtSecond->Divide(recoBeforeBinPtSecond);
 
-        //cout<<count<<"   ->"<<countw<<"  ->"<<sumall<<endl;
+        cout<<count<<"   ->"<<countw<<"  ->"<<sumall<<endl;
 
         TFile *output = new TFile(outputFile,"RECREATE");
         output->cd();
