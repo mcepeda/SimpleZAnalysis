@@ -1,0 +1,30 @@
+<library   file="*.cc" name="SimpleZAnalysisPlugins">
+  <flags EDM_PLUGIN="1"/>
+        <use name="L1Trigger/SimpleZAnalysis"/>
+      <use name="FWCore/Framework"/>
+        <use name="FWCore/PluginManager"/>
+          <use name="FWCore/ParameterSet"/>
+            <use name="DQMServices/Core"/>
+              <use name="DataFormats/L1Trigger"/>
+                <use name="DataFormats/L1CaloTrigger"/>
+                  <use name="DataFormats/L1GlobalCaloTrigger"/>
+                    <use name="DataFormats/EcalDigi"/>
+                      <use name="DataFormats/HcalDigi"/>
+                        <use name="PhysicsTools/UtilAlgos"/>
+                          <use name="FWCore/ServiceRegistry"/>
+                            <use name="DataFormats/EgammaCandidates"/>
+                              <use name="DataFormats/PatCandidates"/>
+                                <use name="DataFormats/TauReco"/>
+                                  <use name="DataFormats/JetReco"/>
+                                    <use name="CondFormats/DataRecord"/>
+                                      <use name="boost"/>
+                                        <use name="FWCore/Utilities"/>
+                                        <use name="FWCore/Framework"/>
+                                        <use name="FWCore/PluginManager"/>
+                                        <use name="FWCore/ParameterSet"/>
+                                        <use name="CommonTools/UtilAlgos"/>
+                                        <use name="DataFormats/PatCandidates" />
+                                        <use name="RecoEgamma/EgammaTools" />
+                                        <use name="RecoEgamma/ElectronIdentification" />
+                                        </library>
+
